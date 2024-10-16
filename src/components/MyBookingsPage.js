@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
 
 const MyBookingsPage = ({ contract, userAddress }) => {
   const [myBookings, setMyBookings] = useState([]);
+  
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -38,7 +38,11 @@ const MyBookingsPage = ({ contract, userAddress }) => {
         myBookings.map(room => (
           <div key={room.id}>
             <p>Room {room.roomNum} - {room.category}</p>
-            <button onClick={() => cancelBooking(room.id)}>Cancel</button>
+            {room.checkedIn ? (
+              <p>Status: Checked In</p> // Indicate checked-in status if manager has checked in the room
+            ) : (
+              <button onClick={() => cancelBooking(room.id)}>Cancel</button> // Cancel button only if not checked in
+            )}
           </div>
         ))
       ) : (
@@ -49,3 +53,8 @@ const MyBookingsPage = ({ contract, userAddress }) => {
 };
 
 export default MyBookingsPage;
+
+
+
+
+

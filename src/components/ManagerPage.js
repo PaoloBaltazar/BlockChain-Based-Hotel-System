@@ -9,11 +9,6 @@ const ManagerPage = ({ rooms, contract }) => {
       return;
     }
 
-    if (typeof contract.checkIn !== 'function') {
-      console.error("CheckIn function is not defined in the contract");
-      return;
-    }
-
     try {
       const tx = await contract.checkIn(roomId);
       await tx.wait();
@@ -31,16 +26,11 @@ const ManagerPage = ({ rooms, contract }) => {
       return;
     }
 
-    if (typeof contract.checkoutRoom !== 'function') {
-      console.error("Checkout function is not defined in the contract");
-      return;
-    }
-
     try {
       const tx = await contract.checkoutRoom(roomId);
       await tx.wait();
       alert("Room checked out successfully!");
-      window.location.reload();
+      window.location.reload(); // After checkout, this will automatically update customer booking status.
     } catch (error) {
       console.error("Checkout failed", error);
       alert("Checkout failed. Please try again.");
@@ -79,7 +69,7 @@ const ManagerPage = ({ rooms, contract }) => {
                   {room?.checkedIn && (
                     <button onClick={() => handleCheckout(index)} className="checkout-button">
                       Checkout
-                    </button>
+                    </button> // Checkout handled by manager, room will disappear from customer's bookings
                   )}
                 </td>
               </tr>
