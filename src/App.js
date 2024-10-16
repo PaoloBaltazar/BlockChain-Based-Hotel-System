@@ -11,7 +11,7 @@ import contractABI from './constants/contractABI';
 import MyBookingsPage from './components/MyBookingsPage'; // Import MyBookingsPage
 // Removed import for PendingBookingsPage
 
-const CONTRACT_ADDRESS = "0x16203AC74D3d459708B69065768A7Ba35c52a115";
+const CONTRACT_ADDRESS = "0x4543eE78C051F16eD023aF045db83B79a25C1724";
 const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
 
 function App() {

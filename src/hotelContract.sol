@@ -82,6 +82,16 @@ contract HotelBooking {
         require(sent, "Payment to manager failed");
     }
 
+    function checkoutRoom(uint256 _roomId) public onlyManager {
+        Room storage room = rooms[_roomId];
+        require(room.checkedIn, "Room is not checked in");
+
+        room.isBooked = false;
+        room.checkedIn = false;  // Mark as not checked in
+        room.bookedBy = address(0);  // Clear the bookedBy address
+    }
+
+
     function getRooms() public view returns (Room[] memory) {
         return rooms;
     }

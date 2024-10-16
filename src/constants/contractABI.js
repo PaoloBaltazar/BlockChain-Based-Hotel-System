@@ -48,7 +48,7 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "checkOut",
+		"name": "checkoutRoom",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

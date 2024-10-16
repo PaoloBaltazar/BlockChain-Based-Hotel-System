@@ -1,8 +1,8 @@
+import React from 'react';
 import { formatEther } from 'ethers';
 import './ManagerPage.css';
 
 const ManagerPage = ({ rooms, contract }) => {
-
   const handleCheckIn = async (roomId) => {
     if (!contract) {
       alert("Contract is not available");
@@ -25,9 +25,30 @@ const ManagerPage = ({ rooms, contract }) => {
     }
   };
 
+  const handleCheckout = async (roomId) => {
+    if (!contract) {
+      alert("Contract is not available");
+      return;
+    }
+
+    if (typeof contract.checkoutRoom !== 'function') {
+      console.error("Checkout function is not defined in the contract");
+      return;
+    }
+
+    try {
+      const tx = await contract.checkoutRoom(roomId);
+      await tx.wait();
+      alert("Room checked out successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error("Checkout failed", error);
+      alert("Checkout failed. Please try again.");
+    }
+  };
+
   return (
     <div className="manager-page-container">
-
       <div className='room-container'>
         <h2>Room List</h2>
         <table>
@@ -53,6 +74,11 @@ const ManagerPage = ({ rooms, contract }) => {
                   {room?.isBooked && !room?.checkedIn && (
                     <button onClick={() => handleCheckIn(index)} className="check-in-button">
                       Check In
+                    </button>
+                  )}
+                  {room?.checkedIn && (
+                    <button onClick={() => handleCheckout(index)} className="checkout-button">
+                      Checkout
                     </button>
                   )}
                 </td>
