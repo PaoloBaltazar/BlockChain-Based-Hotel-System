@@ -9,9 +9,8 @@ import { ethers } from 'ethers';
 import './App.css';
 import contractABI from './constants/contractABI';
 import MyBookingsPage from './components/MyBookingsPage'; // Import MyBookingsPage
-// Removed import for PendingBookingsPage
 
-const CONTRACT_ADDRESS = "0x4543eE78C051F16eD023aF045db83B79a25C1724";
+const CONTRACT_ADDRESS = "0xC09d0e0340d41c04373482D794f1f150412bb4C7";
 const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
 
 function App() {
@@ -106,6 +105,7 @@ function App() {
       <div className="App">
         <Nav userAddress={userAddress} provider={provider} isManager={isManager} />
         <Routes>
+          {/* Default Route - Manager or Customer Homepage */}
           <Route 
             path="/" 
             element={isManager ? (
@@ -126,16 +126,19 @@ function App() {
             )} 
           />
 
+          {/* Route to display My Bookings for customers only */}
           <Route 
             path="/my-bookings" 
             element={isManager ? <Navigate to="/" /> : <MyBookingsPage contract={contract} userAddress={userAddress}/>} 
           />
 
+          {/* Route to display all rooms */}
           <Route 
-            path="/rooms/:category" 
+            path="/rooms" 
             element={isManager ? <Navigate to="/" /> : <RoomDetailPage contract={contract} userAddress={userAddress} />} 
           />
 
+          {/* Manager Page Route */}
           <Route 
             path="/manager" 
             element={<ManagerPage 
@@ -150,6 +153,9 @@ function App() {
               deleteRoom={deleteRoom} 
             />} 
           />
+
+          {/* Redirect all other routes to home */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </Router>

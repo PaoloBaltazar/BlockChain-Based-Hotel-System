@@ -28,6 +28,11 @@ contract HotelBooking {
         // Initialize rooms
         rooms.push(Room(nextRoomId++, 201, 0.01 ether, false, address(0), "Premium", false));
         rooms.push(Room(nextRoomId++, 202, 0.01 ether, false, address(0), "Premium", false));
+        rooms.push(Room(nextRoomId++, 203, 0.01 ether, false, address(0), "Premium", false));
+        rooms.push(Room(nextRoomId++, 204, 0.02 ether, false, address(0), "Deluxe", false));
+        rooms.push(Room(nextRoomId++, 205, 0.02 ether, false, address(0), "Deluxe", false));
+        rooms.push(Room(nextRoomId++, 206, 0.02 ether, false, address(0), "Deluxe", false));
+        
     }
 
     modifier onlyManager() {

@@ -1,9 +1,7 @@
-// src/components/CustomerPage.js
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import './CustomerPage.css'; // Add custom CSS here for styling
 import hero from '../assets/hero-image.jpg';
-import premium from '../assets/premium.jpg';
 
 const CustomerPage = () => {
   return (
@@ -24,13 +22,12 @@ const CustomerPage = () => {
       <div className="room-categories-section">
         <div className="room-heading">
           <h1>Explore Our Rooms</h1>
-          <p>Discover our exclusive Premium rooms and make your booking today.</p>
+          <p>Discover our wide range of rooms and make your booking today.</p>
         </div>
         <div className="room-category-cards">
-          <Link to="/rooms/premium" className="room-category-card">
-            <img src={premium} alt="Premium Room" className="category-image" /> {/* Add alt text */}
-            <h3 className="category-text">Premium Rooms</h3>
-            <p className="category-description">Experience the ultimate blend of luxury and comfort in our Premium rooms.</p>
+          <Link to="/rooms" className="room-category-card">
+            <h3 className="category-text">View All Rooms</h3>
+            <p className="category-description">Browse through all available rooms and find the one that suits you best.</p>
           </Link>
         </div>
       </div>

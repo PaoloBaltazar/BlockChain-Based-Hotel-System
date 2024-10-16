@@ -1,22 +1,20 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 
 const RoomDetailPage = ({ contract, userAddress }) => {
-  const { category } = useParams();
-  const [rooms, setRooms] = React.useState([]);
+  const [rooms, setRooms] = useState([]);
 
-  const loadRoomsByCategory = async () => {
+  // Fetch all rooms without filtering by category
+  const loadRooms = async () => {
     if (contract) {
       const allRooms = await contract.getRooms();
-      const filteredRooms = allRooms.filter(room => room.category.toLowerCase() === category.toLowerCase());
-      setRooms(filteredRooms);
+      setRooms(allRooms);
     }
   };
 
-  React.useEffect(() => {
-    loadRoomsByCategory();
-  }, [contract, category]);
+  useEffect(() => {
+    loadRooms();
+  }, [contract]);
 
   const bookRoom = async (roomId, price) => {
     try {
@@ -32,7 +30,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
 
   return (
     <div className="room-detail-page">
-      <h2>{category} Rooms</h2>
+      <h2>All Rooms</h2>
       {rooms.length > 0 ? (
         <ul>
           {rooms.map((room, index) => (
@@ -50,7 +48,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
           ))}
         </ul>
       ) : (
-        <p>No rooms available in this category.</p>
+        <p>No rooms available.</p>
       )}
     </div>
   );
