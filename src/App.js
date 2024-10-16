@@ -11,7 +11,7 @@ import contractABI from './constants/contractABI';
 import MyBookingsPage from './components/MyBookingsPage'; // Import MyBookingsPage
 import PendingBookingsPage from './components/PendingBookingsPage'; 
 
-const CONTRACT_ADDRESS = "0xBd885BCA85D077c622bB664A8e9DcCF20927a716";
+const CONTRACT_ADDRESS = "0x16203AC74D3d459708B69065768A7Ba35c52a115";
 const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
 
 function App() {
@@ -119,6 +119,7 @@ function App() {
                 setCategory={setCategory} 
                 category={category} 
                 deleteRoom={deleteRoom}
+                contract={contract}
               />
             ) : (
               <CustomerPage />
@@ -127,7 +128,7 @@ function App() {
 
           <Route 
             path="/my-bookings" 
-            element={isManager ? <Navigate to="/" /> : <MyBookingsPage />} 
+            element={isManager ? <Navigate to="/" /> : <MyBookingsPage contract={contract} userAddress={userAddress}/>} 
           />
 
           <Route 
@@ -153,7 +154,7 @@ function App() {
           {/* Add new route for pending bookings */}
           <Route 
             path="/pending-bookings" 
-            element={isManager ? <PendingBookingsPage /> : <Navigate to="/" />} 
+            element={isManager ? <PendingBookingsPage contract={contract}/> : <Navigate to="/" />} 
           />
         </Routes>
       </div>

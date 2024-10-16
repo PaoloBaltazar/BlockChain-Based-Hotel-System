@@ -9,9 +9,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
   const loadRoomsByCategory = async () => {
     if (contract) {
       const allRooms = await contract.getRooms();
-      console.log("All Rooms:", allRooms); // Debugging line
       const filteredRooms = allRooms.filter(room => room.category.toLowerCase() === category.toLowerCase());
-      console.log("Filtered Rooms:", filteredRooms); // Debugging line
       setRooms(filteredRooms);
     }
   };
@@ -25,7 +23,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
       const transaction = await contract.bookRoom(roomId, { value: price });
       await transaction.wait();
       alert("Room booked successfully!");
-      window.location.reload(); // Reload the page to reflect the booking
+      window.location.reload();
     } catch (error) {
       console.error("Booking failed", error);
       alert("Booking failed. Please try again.");
@@ -41,7 +39,10 @@ const RoomDetailPage = ({ contract, userAddress }) => {
             <li key={index}>
               <p>Room Number: {room.roomNum.toString()}</p>
               <p>Price: {ethers.formatEther(room.price.toString())} ETH</p>
-              <p>Status: {room.isBooked ? "Booked" : "Available"}</p>
+              <p>Status: 
+                {room.checkedIn ? "Checked In" : 
+                room.isBooked ? "Booked (Waiting for check-in)" : "Available"}
+              </p>
               {!room.isBooked && (
                 <button onClick={() => bookRoom(index, room.price)}>Book Room</button>
               )}

@@ -4,42 +4,6 @@ const contractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_manager",
-				"type": "address"
-			}
-		],
-		"name": "addManager",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_roomNum",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_category",
-				"type": "string"
-			}
-		],
-		"name": "addRoom",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "_roomId",
 				"type": "uint256"
@@ -58,7 +22,7 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "deleteRoom",
+		"name": "cancelBooking",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -66,12 +30,25 @@ const contractABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_manager",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "_roomId",
+				"type": "uint256"
 			}
 		],
-		"name": "removeManager",
+		"name": "checkIn",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_roomId",
+				"type": "uint256"
+			}
+		],
+		"name": "checkOut",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -122,30 +99,16 @@ const contractABI = [
 						"internalType": "string",
 						"name": "category",
 						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "checkedIn",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct HotelBooking.Room[]",
 				"name": "",
 				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "account",
-				"type": "address"
-			}
-		],
-		"name": "isManager",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -217,6 +180,25 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
+		"name": "roomEscrow",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"name": "rooms",
 		"outputs": [
 			{
@@ -248,6 +230,11 @@ const contractABI = [
 				"internalType": "string",
 				"name": "category",
 				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "checkedIn",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
