@@ -1,17 +1,16 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Import Navigate for redirection
 import ManagerPage from './components/ManagerPage';
 import CustomerPage from './components/CustomerPage';
-import RoomDetailPage from './components/RoomDetailPage'; // Import RoomDetailPage
+import RoomDetailPage from './components/RoomDetailPage';
 import Nav from './components/Nav';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import './App.css';
 import contractABI from './constants/contractABI';
 
-const CONTRACT_ADDRESS = "0xa32899d4A9C28099Ed5db361FbB2F589f5E3A3f3"; // Replace with your deployed contract address
-const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc"; // Replace with the actual manager's address
+const CONTRACT_ADDRESS = "0x3Cf0d99ef873Aff699fC71A6eD88fcc0503BB64e";
+const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
 
 function App() {
   const [rooms, setRooms] = useState([]);
@@ -66,13 +65,13 @@ function App() {
 
     try {
       const transaction = await contract.addRoom(
-        ethers.parseEther(price),  // Price in ETH
-        parseInt(roomNum),         // Room number as integer
-        category                   // Selected category
+        ethers.parseEther(price),
+        parseInt(roomNum),
+        category
       );
       await transaction.wait();
       alert("Room added successfully!");
-      window.location.reload(); // Reload the page to show updated rooms list
+      window.location.reload(); 
     } catch (error) {
       console.error("Room addition failed", error);
     }
@@ -94,17 +93,18 @@ function App() {
         const transaction = await contract.deleteRoom(roomId);
         await transaction.wait();
         alert("Room deleted successfully!");
-        window.location.reload(); // Reload the page to show updated rooms list
+        window.location.reload(); 
     } catch (error) {
         console.error("Room deletion failed", error);
     }
-};
+  };
 
   return (
     <Router>
       <div className="App">
         <Nav userAddress={userAddress} provider={provider} />
         <Routes>
+          {/* If the user is a manager, show the ManagerPage */}
           <Route path="/" element={isManager ? (
             <ManagerPage 
               rooms={rooms} 
@@ -115,13 +115,33 @@ function App() {
               roomNum={roomNum} 
               setCategory={setCategory} 
               category={category} 
-              deleteRoom={deleteRoom} // Pass the delete function to the ManagerPage
+              deleteRoom={deleteRoom}
             />
           ) : (
             <CustomerPage />
           )} />
-          <Route path="/rooms/:category" element={<RoomDetailPage contract={contract} userAddress={userAddress} />} />
-          <Route path="/manager" element={<ManagerPage rooms={rooms} addRoom={addRoom} setPrice={setPrice} price={price} setRoomNum={setRoomNum} roomNum={roomNum} setCategory={setCategory} category={category} deleteRoom={deleteRoom} />} />
+
+          {/* Redirect managers away from room detail pages */}
+          <Route 
+            path="/rooms/:category" 
+            element={isManager ? <Navigate to="/" /> : <RoomDetailPage contract={contract} userAddress={userAddress} />} 
+          />
+
+          {/* Manager-specific page */}
+          <Route 
+            path="/manager" 
+            element={<ManagerPage 
+              rooms={rooms} 
+              addRoom={addRoom} 
+              setPrice={setPrice} 
+              price={price} 
+              setRoomNum={setRoomNum} 
+              roomNum={roomNum} 
+              setCategory={setCategory} 
+              category={category} 
+              deleteRoom={deleteRoom} 
+            />} 
+          />
         </Routes>
       </div>
     </Router>
