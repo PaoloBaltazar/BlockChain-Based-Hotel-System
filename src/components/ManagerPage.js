@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import { formatEther } from 'ethers';
 import './ManagerPage.css';
 
-const ManagerPage = ({ rooms, addRoom, setPrice, price, setRoomNum, roomNum, setCategory, category, deleteRoom, contract }) => {
-  const [roomToDelete, setRoomToDelete] = useState('');
+const ManagerPage = ({ rooms, contract }) => {
 
   const handleCheckIn = async (roomId) => {
     if (!contract) {
@@ -29,54 +27,6 @@ const ManagerPage = ({ rooms, addRoom, setPrice, price, setRoomNum, roomNum, set
 
   return (
     <div className="manager-page-container">
-      <div className='add-room-container'>
-        <h2>Add Room</h2>
-        <div className="form-container">
-          <input 
-            type="text" 
-            placeholder="Enter room number" 
-            value={roomNum}
-            className="input-style"
-            onChange={(e) => setRoomNum(e.target.value)} 
-          />
-          <input 
-            type="text" 
-            placeholder="Enter room price in ETH" 
-            value={price}
-            className="input-style"
-            onChange={(e) => setPrice(e.target.value)} 
-          />
-          <select 
-            value={category} 
-            className="category-select"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="" disabled>Select Category</option>
-            <option value="Premium">Premium</option>
-            <option value="Prestige">Prestige</option>
-            <option value="Presidential">Presidential</option>
-          </select>
-          <button onClick={addRoom} className='add-room-button'>Add Room</button>
-        </div>
-      </div>
-
-      <div className="delete-room-container">
-        <h2>Delete Room</h2>
-        <div className="form-container">
-          <input 
-            type="text" 
-            placeholder="Enter room number to delete" 
-            value={roomToDelete}
-            onChange={(e) => setRoomToDelete(e.target.value)} 
-            className="input-style"
-          />
-          <button 
-            onClick={() => deleteRoom(roomToDelete)} 
-            className='delete-room-button'>
-            Delete Room
-          </button>
-        </div>
-      </div>
 
       <div className='room-container'>
         <h2>Room List</h2>

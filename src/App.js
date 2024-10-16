@@ -9,7 +9,7 @@ import { ethers } from 'ethers';
 import './App.css';
 import contractABI from './constants/contractABI';
 import MyBookingsPage from './components/MyBookingsPage'; // Import MyBookingsPage
-import PendingBookingsPage from './components/PendingBookingsPage'; 
+// Removed import for PendingBookingsPage
 
 const CONTRACT_ADDRESS = "0x16203AC74D3d459708B69065768A7Ba35c52a115";
 const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
@@ -149,12 +149,6 @@ function App() {
               category={category} 
               deleteRoom={deleteRoom} 
             />} 
-          />
-
-          {/* Add new route for pending bookings */}
-          <Route 
-            path="/pending-bookings" 
-            element={isManager ? <PendingBookingsPage contract={contract}/> : <Navigate to="/" />} 
           />
         </Routes>
       </div>

@@ -31,7 +31,6 @@ const Nav = ({ userAddress, provider, isManager }) => {
             {isManager ? (
               <>
                 <Link to="/manager">Dashboard</Link>
-                <Link to="/pending-bookings">Pending Bookings</Link> {/* New link */}
               </>
             ) : (
               <>
