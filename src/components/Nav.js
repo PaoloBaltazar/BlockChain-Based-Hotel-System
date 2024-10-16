@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import { ethers } from 'ethers';
 import icon from '../assets/metamask-icon.png';
 import './Nav.css';
@@ -7,13 +7,12 @@ import './Nav.css';
 const Nav = ({ userAddress, provider, isManager }) => {
   const [balance, setBalance] = useState('');
 
-  // Fetch the balance when the provider or userAddress changes
   useEffect(() => {
     const getBalance = async () => {
       if (provider && userAddress) {
         const balance = await provider.getBalance(userAddress);
-        const ethBalance = ethers.formatEther(balance); // Convert balance to ETH
-        setBalance(parseFloat(ethBalance).toFixed(4)); // Show 4 decimal places
+        const ethBalance = ethers.formatEther(balance); 
+        setBalance(parseFloat(ethBalance).toFixed(4)); 
       }
     };
 
@@ -30,12 +29,11 @@ const Nav = ({ userAddress, provider, isManager }) => {
 
           <div className="nav-links">
             {isManager ? (
-              // Show Dashboard link for manager
               <>
                 <Link to="/manager">Dashboard</Link>
+                <Link to="/pending-bookings">Pending Bookings</Link> {/* New link */}
               </>
             ) : (
-              // Show Home and Bookings (Pending Booking changed to My Bookings) for customer
               <>
                 <Link to="/">Home</Link>
                 <Link to="/my-bookings">My Bookings</Link>

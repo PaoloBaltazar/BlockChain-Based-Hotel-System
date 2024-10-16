@@ -9,6 +9,7 @@ import { ethers } from 'ethers';
 import './App.css';
 import contractABI from './constants/contractABI';
 import MyBookingsPage from './components/MyBookingsPage'; // Import MyBookingsPage
+import PendingBookingsPage from './components/PendingBookingsPage'; 
 
 const CONTRACT_ADDRESS = "0x3Cf0d99ef873Aff699fC71A6eD88fcc0503BB64e";
 const MANAGER_ADDRESS = "0xA5f8CB40B12B582844F4d7FD7B554F911bF35bDc";
@@ -105,36 +106,35 @@ function App() {
       <div className="App">
         <Nav userAddress={userAddress} provider={provider} isManager={isManager} />
         <Routes>
-          {/* If the user is a manager, show the ManagerPage */}
-          <Route path="/" element={isManager ? (
-            <ManagerPage 
-              rooms={rooms} 
-              addRoom={addRoom} 
-              setPrice={setPrice} 
-              price={price} 
-              setRoomNum={setRoomNum} 
-              roomNum={roomNum} 
-              setCategory={setCategory} 
-              category={category} 
-              deleteRoom={deleteRoom}
-            />
-          ) : (
-            <CustomerPage />
-          )} />
+          <Route 
+            path="/" 
+            element={isManager ? (
+              <ManagerPage 
+                rooms={rooms} 
+                addRoom={addRoom} 
+                setPrice={setPrice} 
+                price={price} 
+                setRoomNum={setRoomNum} 
+                roomNum={roomNum} 
+                setCategory={setCategory} 
+                category={category} 
+                deleteRoom={deleteRoom}
+              />
+            ) : (
+              <CustomerPage />
+            )} 
+          />
 
-          {/* Route for "My Bookings", accessible only to customers */}
           <Route 
             path="/my-bookings" 
             element={isManager ? <Navigate to="/" /> : <MyBookingsPage />} 
           />
 
-          {/* Redirect managers away from room detail pages */}
           <Route 
             path="/rooms/:category" 
             element={isManager ? <Navigate to="/" /> : <RoomDetailPage contract={contract} userAddress={userAddress} />} 
           />
 
-          {/* Manager-specific page */}
           <Route 
             path="/manager" 
             element={<ManagerPage 
@@ -148,6 +148,12 @@ function App() {
               category={category} 
               deleteRoom={deleteRoom} 
             />} 
+          />
+
+          {/* Add new route for pending bookings */}
+          <Route 
+            path="/pending-bookings" 
+            element={isManager ? <PendingBookingsPage /> : <Navigate to="/" />} 
           />
         </Routes>
       </div>
