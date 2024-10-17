@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
+import './RoomDetailPage.css';
 
 const RoomDetailPage = ({ contract, userAddress }) => {
   const [rooms, setRooms] = useState([]);
@@ -74,40 +75,43 @@ const RoomDetailPage = ({ contract, userAddress }) => {
   return (
     <div className="room-detail-page">
       <h2>Available Rooms</h2>
-      <div className="rooms-list" style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="rooms-list">
         {rooms.length > 0 ? rooms.map((room) => (
-          <div key={room.id} className="room-card" style={{ border: '1px solid #ccc', padding: '16px', margin: '8px', width: '300px' }}>
+          <div key={room.id} className="room-card">
             <h3>Room {room.roomNum} ({room.category})</h3>
             <p>Price per day: {room.price ? ethers.formatEther(room.price.toString()) : "N/A"} ETH</p>
 
-            <label>
-              Check-in:
-              <input
-                type="date"
-                name="checkIn"
-                value={roomStates[room.id]?.checkIn || ""}
-                onChange={(e) => handleDateChange(e, room.id)}
-                disabled={room.isBooked || room.checkedIn} // Disable inputs if the room is booked or checked in
-              />
-            </label>
-            <label>
-              Check-out:
-              <input
-                type="date"
-                name="checkOut"
-                value={roomStates[room.id]?.checkOut || ""}
-                onChange={(e) => handleDateChange(e, room.id)}
-                disabled={room.isBooked || room.checkedIn} // Disable inputs if the room is booked or checked in
-              />
-            </label>
+            <div className="date-inputs">
+              <label>
+                Check-in:
+                <input
+                  type="date"
+                  name="checkIn"
+                  value={roomStates[room.id]?.checkIn || ""}
+                  onChange={(e) => handleDateChange(e, room.id)}
+                  disabled={room.isBooked || room.checkedIn} // Disable inputs if booked or checked in
+                />
+              </label>
+              <label>
+                Check-out:
+                <input
+                  type="date"
+                  name="checkOut"
+                  value={roomStates[room.id]?.checkOut || ""}
+                  onChange={(e) => handleDateChange(e, room.id)}
+                  disabled={room.isBooked || room.checkedIn} // Disable inputs if booked or checked in
+                />
+              </label>
+            </div>
 
             {roomStates[room.id]?.totalPrice && (
-              <p>Total Price: {roomStates[room.id].totalPrice} ETH</p>
+              <p className="total-price">Total Price: {roomStates[room.id].totalPrice} ETH</p>
             )}
 
             <button
+              className="book-button"
               onClick={() => bookRoom(room.id)}
-              disabled={room.isBooked || room.checkedIn} // Disable button if the room is booked or checked in
+              disabled={room.isBooked || room.checkedIn} // Disable button if booked or checked in
             >
               {room.isBooked ? "Booked" : "Book Now"}
             </button>
