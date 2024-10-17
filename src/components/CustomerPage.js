@@ -14,15 +14,14 @@ const CustomerPage = () => {
           className="hero-image" 
         />
         <div className="hero-text">
-          <h3>Welcome, Valued Customer!</h3>
-          <h1>Accommodation</h1>
+          <h1 className="main-heading-text">Welcome, Valued Customer!</h1>
         </div>
       </div>
 
       <div className="room-categories-section">
         <div className="room-heading">
-          <h1>Explore Our Rooms</h1>
-          <p>Discover our wide range of rooms and make your booking today.</p>
+          <h1 className="explore-rooms">Explore Our Rooms</h1>
+          <p className="explore-rooms-subheading">Discover our wide range of rooms and make your booking today.</p>
         </div>
         <div className="room-category-cards">
           <Link to="/rooms" className="room-category-card">

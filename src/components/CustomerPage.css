@@ -25,6 +25,10 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
+.main-heading-text {
+  font-size: 60px;
+}
+
 .room-categories-section {
   margin: 40px 150px;
   text-align: center;
@@ -53,6 +57,8 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   transition: transform 0.3s;
   cursor: pointer;
+  text-decoration: none; /* Removes the underline */
+  color: black; /* Makes the link text black */
 }
 
 .room-category-card:hover {
@@ -66,11 +72,23 @@
   border-radius: 8px; /* Optional: To give images a rounded look */
 }
 
+
 .category-text {
   font-family: "Nanum Myeongjo", serif;
   font-weight: 700;
+  font-size: 30px;
+  color: black; /* Makes the text black */
 }
 
 .category-description {
-  color: rgb(110, 110, 110);
+  font-size: 20px;
+  color: black; /* Makes the text black */
+}
+
+.explore-rooms {
+  font-size: 50px;
+}
+
+.explore-rooms-subheading {
+  font-size: 30px;
 }

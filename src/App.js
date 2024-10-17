@@ -58,48 +58,6 @@ function App() {
     initialize();
   }, []);
 
-  const addRoom = async () => {
-    if (!price || isNaN(price) || !roomNum || isNaN(roomNum) || !category) {
-      alert("Please enter valid room number, price, and select a category.");
-      return;
-    }
-
-    try {
-      const transaction = await contract.addRoom(
-        ethers.parseEther(price),
-        parseInt(roomNum),
-        category
-      );
-      await transaction.wait();
-      alert("Room added successfully!");
-      window.location.reload(); 
-    } catch (error) {
-      console.error("Room addition failed", error);
-    }
-  };
-
-  const deleteRoom = async (roomNum) => {
-    if (!roomNum || isNaN(roomNum)) {
-        alert("Please enter a valid room number.");
-        return;
-    }
-
-    const roomId = rooms.findIndex(room => room.roomNum.toString() === roomNum);
-    if (roomId === -1) {
-        alert("Room not found.");
-        return;
-    }
-
-    try {
-        const transaction = await contract.deleteRoom(roomId);
-        await transaction.wait();
-        alert("Room deleted successfully!");
-        window.location.reload(); 
-    } catch (error) {
-        console.error("Room deletion failed", error);
-    }
-  };
-
   return (
     <Router>
       <div className="App">
@@ -111,14 +69,12 @@ function App() {
             element={isManager ? (
               <ManagerPage 
                 rooms={rooms} 
-                addRoom={addRoom} 
                 setPrice={setPrice} 
                 price={price} 
                 setRoomNum={setRoomNum} 
                 roomNum={roomNum} 
                 setCategory={setCategory} 
                 category={category} 
-                deleteRoom={deleteRoom}
                 contract={contract}
               />
             ) : (

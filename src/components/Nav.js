@@ -24,7 +24,7 @@ const Nav = ({ userAddress, provider, isManager }) => {
       <nav className="navbar">
         <div className="nav-left-section">
           <div className="logo-container">
-            <h3>Hotel DApp</h3>
+            <h3>Hotel dApp</h3>
           </div>
 
           <div className="nav-links">
