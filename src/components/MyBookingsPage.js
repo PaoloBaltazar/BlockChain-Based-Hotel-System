@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 const MyBookingsPage = ({ contract, userAddress }) => {
   const [myBookings, setMyBookings] = useState([]);
-  
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const rooms = await contract.getRooms();
+        console.log("Fetched rooms:", rooms); // Debug log for fetched rooms
         const bookings = rooms.filter(room => room.bookedBy === userAddress);
         setMyBookings(bookings);
       } catch (error) {
@@ -25,7 +25,10 @@ const MyBookingsPage = ({ contract, userAddress }) => {
       const tx = await contract.cancelBooking(roomId);
       await tx.wait();
       alert("Booking cancelled and refund processed.");
-      window.location.reload();
+
+      // Update local state to remove the canceled booking
+      setMyBookings((prevBookings) => prevBookings.filter(room => room.id !== roomId));
+      
     } catch (error) {
       console.error("Error cancelling booking:", error);
     }
@@ -53,8 +56,3 @@ const MyBookingsPage = ({ contract, userAddress }) => {
 };
 
 export default MyBookingsPage;
-
-
-
-
-
