@@ -74,7 +74,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
 
   return (
     <div className="room-detail-page">
-      <h2>Available Rooms</h2>
+      <h2 className="rooms-heading">Available Rooms</h2>
       <div className="rooms-list">
         {rooms.length > 0 ? rooms.map((room) => (
           <div key={room.id} className="room-card">
