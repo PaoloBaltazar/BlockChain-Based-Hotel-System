@@ -138,22 +138,6 @@ function App() {
             element={isManager ? <Navigate to="/" /> : <RoomDetailPage contract={contract} userAddress={userAddress} />} 
           />
 
-          {/* Manager Page Route */}
-          <Route 
-            path="/manager" 
-            element={<ManagerPage 
-              rooms={rooms} 
-              addRoom={addRoom} 
-              setPrice={setPrice} 
-              price={price} 
-              setRoomNum={setRoomNum} 
-              roomNum={roomNum} 
-              setCategory={setCategory} 
-              category={category} 
-              deleteRoom={deleteRoom} 
-            />} 
-          />
-
           {/* Redirect all other routes to home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

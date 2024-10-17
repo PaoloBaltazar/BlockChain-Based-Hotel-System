@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Use NavLink for active state
 import { ethers } from 'ethers';
 import icon from '../assets/metamask-icon.png';
 import './Nav.css';
@@ -11,8 +11,8 @@ const Nav = ({ userAddress, provider, isManager }) => {
     const getBalance = async () => {
       if (provider && userAddress) {
         const balance = await provider.getBalance(userAddress);
-        const ethBalance = ethers.formatEther(balance); 
-        setBalance(parseFloat(ethBalance).toFixed(4)); 
+        const ethBalance = ethers.formatEther(balance);
+        setBalance(parseFloat(ethBalance).toFixed(4));
       }
     };
 
@@ -29,13 +29,22 @@ const Nav = ({ userAddress, provider, isManager }) => {
 
           <div className="nav-links">
             {isManager ? (
-              <>
-                <Link to="/manager">Dashboard</Link>
-              </>
+              <NavLink to="/manager" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                Dashboard
+              </NavLink>
             ) : (
               <>
-                <Link to="/">Home</Link>
-                <Link to="/my-bookings">My Bookings</Link>
+                <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                  Home
+                </NavLink>
+                
+                <NavLink to="/rooms" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                  Accommodations
+                </NavLink>
+
+                <NavLink to="/my-bookings" className={({ isActive }) => isActive ? 'active-link' : ''}>
+                  My Bookings
+                </NavLink>
               </>
             )}
           </div>

@@ -29,6 +29,24 @@
   gap: 30px;
 }
 
+.nav-links a {
+  color: black; /* Set link color to black or any preferred color */
+  text-decoration: none; /* Remove underline */
+  padding: 15px 15px; /* Add padding to links */
+  font-weight: 500; /* Adjust font weight if needed */
+  position: relative;
+  border-bottom: 2px solid transparent; /* Initially, no border */
+}
+
+.nav-links a.active-link {
+  border-bottom: 2px solid #000; /* Add solid bottom border to the active link */
+  color: #000; /* Active link color */
+}
+
+.nav-links a:hover {
+  color: #666; /* Change color on hover */
+}
+
 .logo-container {
   display: flex;
   align-items: center;
