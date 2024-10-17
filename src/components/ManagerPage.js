@@ -40,10 +40,10 @@ const ManagerPage = ({ rooms, contract }) => {
   return (
     <div className="manager-page-container">
       <div className='room-container'>
-        <h2>Room List</h2>
+        <h2 className="room-list-header">Room List</h2>
         <table>
           <thead>
-            <tr>
+            <tr className="columns">
               <th>Room</th>
               <th>Price (ETH)</th>
               <th>Status</th>
