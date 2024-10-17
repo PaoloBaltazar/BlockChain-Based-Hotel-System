@@ -78,7 +78,7 @@ const RoomDetailPage = ({ contract, userAddress }) => {
       <div className="rooms-list">
         {rooms.length > 0 ? rooms.map((room) => (
           <div key={room.id} className="room-card">
-            <h3>Room {room.roomNum} ({room.category})</h3>
+            <h3>Room {room?.roomNum?.toString()} ({room.category})</h3>
             <p>Price per day: {room.price ? ethers.formatEther(room.price.toString()) : "N/A"} ETH</p>
 
             <div className="date-inputs">
