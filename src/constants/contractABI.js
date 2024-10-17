@@ -7,6 +7,16 @@ const contractABI = [
 				"internalType": "uint256",
 				"name": "_roomId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_checkInTimestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_checkOutTimestamp",
+				"type": "uint256"
 			}
 		],
 		"name": "bookRoom",
@@ -104,6 +114,16 @@ const contractABI = [
 						"internalType": "bool",
 						"name": "checkedIn",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "checkInTimestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "checkOutTimestamp",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct HotelBooking.Room[]",
@@ -235,6 +255,16 @@ const contractABI = [
 				"internalType": "bool",
 				"name": "checkedIn",
 				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "checkInTimestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "checkOutTimestamp",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
